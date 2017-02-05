@@ -6,9 +6,6 @@ The purpose of this document is to provide detailed descriptions for RewardOps A
 Introduction
 ============
 
-Introduction
-============
-
 ## Security
 
 ### HTTPS
