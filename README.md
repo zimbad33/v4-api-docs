@@ -110,6 +110,8 @@ API Endpoints
 
 ## Supplier Items
 
+## Offers
+
 ## Orders
 
 ## Supplier Orders
@@ -345,4 +347,81 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **74x74** string | Url of the image with a resolution of 74x74 |
 | **46x46** string | Url of the image with a resolution of 46x46 |
 
+## List all items
+
+Returns a list of program items.
+
+| Arguments |   |
+|-----------|---|
+| **program_id** integer, required | Unique identifier assigned to each program |
+| **segment_id** integer, optional | Unique identifier assigned to each program segment |
+| **q** string, optional | Search term in item name, description, or notes |
+| **page** integer, optional | The page number returned |
+| **page_per_count** integer, optional | Records returned per page |
+| **locale_code** string, optional | Language and locale for member-facing fields |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{program_id}/items
+```
+
+Supplier Items
+==============
+
+## The supplier item variant object
+
+| Attributes |   |
+|------------|---|
+| **id** string | Unique RewardOps identifier for the supplier item variant |
+| **external_supplier_id** string | Unique identifier assigned by the supplier for the item variant |
+| **labels** array | A collection of program specific labels |
+| **product_url** string | URL for the supplier item |
+| **reviews_rating** decimal | Review rating for the supplier item |
+| **order_token** string | Token used when ordering the supplier item variant |
+| **geo_targeting** object | A [geo targeting object](#geo-targeting) for the supplier item variant |
+| **fulfillment** object | A [fulfillment object](#fulfillment) for the supplier item variant |
+| **pricing** object | A [pricing object](#pricing) for the supplier item variant |
+
+### The geo targeting sub-object
+
+| Attributes |   |
+|------------|---|
+| **include** array | A collection of regions and sub-regions to include |
+| **exclude** array | A collection of regions and sub-regions to exclude |
+
+### The fulfillment sub-object
+
+| Attributes |   |
+|------------|---|
+| **requirement** array | A collection of member details that must be submitted to fulfill the item |
+| **instructions** string | Supplier-specific fulfillment instructions that should be displayed to the member |
+| **terms_and_conditions** string | Supplier-specific terms and conditions that should be displayed to the member |
+| **shipping_included** boolean | Incremental cost for shipping an item |
+| **shipping_estimate** decimal | Estimated shipping cost |
+| **handling_included** boolean | Incremental cost for handling an item |
+| **handling_estimate** decimal | Estimated handling cost |
+
+### The pricing sub-object
+
+| Attributes |   |
+|------------|---|
+| **regular_price** decimal | An item's regular price |
+| **sale_price** decimal | An item's sale price |
+| **tax_eligible** boolean | Incremental cost for sales tax |
+
+Offers
+======
+
+## The offer object
+
+| Attributes |   |
+|------------|---|
+| **id** integer | Unique identifier assigned to each offer |
+| **name** string | Offer name |
+| **supplier_id** integer | Unique identifier of the supplier |
+| **type** string | Offer type |
+| **starts_at** string | Offer start date |
+| **ends_at** string | Offer end date |
+| **updated_at** string | Offer last updated date |
 
