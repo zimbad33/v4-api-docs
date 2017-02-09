@@ -353,7 +353,7 @@ Returns a list of program items.
 
 | Arguments |   |
 |-----------|---|
-| **program_id** integer, required | Unique identifier assigned to each program |
+| **program_id** integer, required | Unique identifier assigned to each program item |
 | **segment_id** integer, optional | Unique identifier assigned to each program segment |
 | **q** string, optional | Search term in item name, description, or notes |
 | **page** integer, optional | The page number returned |
@@ -366,6 +366,23 @@ Returns a list of program items.
 GET /api/v4/programs/{program_id}/items
 ```
 
+## Retrieve an item
+
+Retrieves the deatils of an item.
+
+| Arguments |   |
+|-----------|---|
+| **id** integer, required | Unique identifier assigned to each program item |
+| **program_id** integer, required | Unique identifier assigned to each program |
+| **segment_id** integer, optional | Unique identifier assigned to each program segment |
+| **locale_code** string, optional | Language and locale for member-facing fields |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{program_id}/items/{id}
+```
+
 Supplier Items
 ==============
 
@@ -374,7 +391,7 @@ Supplier Items
 | Attributes |   |
 |------------|---|
 | **id** string | Unique RewardOps identifier for the supplier item variant |
-| **external_supplier_id** string | Unique identifier assigned by the supplier for the item variant |
+| **external_supplier_id** string | Unique identifier assigned to each supplier item |
 | **labels** array | A collection of program specific labels |
 | **product_url** string | URL for the supplier item |
 | **reviews_rating** decimal | Review rating for the supplier item |
@@ -409,6 +426,24 @@ Supplier Items
 | **regular_price** decimal | An item's regular price |
 | **sale_price** decimal | An item's sale price |
 | **tax_eligible** boolean | Incremental cost for sales tax |
+
+## Update a supplier item
+
+Updates the availability status and pricing of an item.
+
+| Arguments |   |
+|-----------|---|
+| **external_supplier_id** integer, required | Unique identifier assigned to each supplier item |
+| **availability_status** string, required | Possible values are `available`, `out_of_stock`, or `inactive`. Dictates whether a supplier item can be ordered. |
+| **regular_price** integer, optional | Supplier item's regular price |
+| **sale_price** integer, optional | Supplier item's sale price |
+
+
+##### Endpoint
+
+```nginx
+PATCH /api/v4/suppliers/{supplier_id}/items/{id}}
+```
 
 Offers
 ======
