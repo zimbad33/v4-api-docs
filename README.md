@@ -763,3 +763,101 @@ PATCH /api/v4/programs/{program_id}/orders/{id}
 Supplier Orders
 ===============
 
+## Create a supplier order
+
+Creates a new supplier order object.
+
+| Arguments |   |
+|-----------|---|
+| **supplier_id** integer, required | Unique identified assigned to each supplier.
+| **program_id** integer, required | Unique identifier assigned to each rewards program. |
+| **item_order_token** string, required | The token identifying the supplier's offsite catalog. |
+| **supplier_order_id** string, optional | A unique identifier provided by the supplier. |
+| **detailed** boolean, optional | When set to true, full order details are returned/provided. By default, `detailed` is set to `false`. | **member_paid** object, required | A member paid object for the supplier order. |
+| **program_cost** object, required | A program cost object for the supplier order. |
+| **items** object, required | A collection of supplier items included in this order. |
+| **member** object, required | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
+
+##### Endpoint
+
+```nginx
+POST /api/v4/suppliers/{supplier_id}/orders
+```
+
+## Create a supplier order asset
+
+Creates a new supplier order object.
+
+| Arguments |   |
+|-----------|---|
+| **supplier_id** integer, required | Unique identifier assigned to each supplier. |
+| **order_id** string, required | Unique external identifier for the supplier order. |
+| **order_item_id** string, required | Unique external identifier for an item in the supplier order. |
+| **type** string, required | Find the allowed asset type with this Type: UNIQUE_CODE, UNIVERSAL_CODE, UNIQUE_REDIRECT_LINK, UNIVERSAL_REDIRECT_LINK, UNIQUE_IMAGE, UNIVERSAL_IMAGE, UNIQUE_DOWNLOAD_LINK, UNIVERSAL_DOWNLOAD_LINK, MAILED_ASSET, E_MAILED_ASSET, UNIQUE_EXTERNAL_CODE, UNIQUE_EXTERNAL_REDIRECT_LINK, UNIQUE_EXTERNAL_IMAGE, UNIQUE_EXTERNAL_DOWNLOAD_LINK |
+| **label** string, required | The allowed asset type with this label. |
+| **value** string, required | Value assigned to this asset. |
+
+```nginx
+POST /api/v4/suppliers/{supplier_id}/orders/{order_id}/order_items/{order_item_id}/order_assets
+```
+
+## List all supplier orders
+
+Returns a list of orders for a specific supplier. The orders are returned sorted by reverse chronological order.
+
+| Arguments |   |
+|-----------|---|
+| **supplier_id** integer, required | Unique identifier assigned to each supplier. |
+| **start_date** string, optional | Start date of date range to query for orders. |
+| **end_date** string, optional | End date of date range to query for orders. |
+| **detailed** boolean, optional | Dictates whether full order details are returned/provided. By default, `detailed` is set to `false`. |
+| **page** tag, optional | The page number to return. |
+| **per_page_count** integer, optional | Number of orders returned per page. |
+| **sort_by** string, optional | Sort reward results [newest, oldest]. |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/suppliers/{supplier_id}/orders
+```
+
+## Retrieve a supplier order
+
+Retrieves the details of an existing order for a specific supplier.
+
+| Arguments |   |
+|-----------|---|
+| **id** string, required | Unique external identifier for the order. |
+| **supplier_id** integer, required | Unique identifier assigned to each supplier. |
+| **use_supplier_order_id** boolean, optional | Dictates whether to use the supplier-supplied order id. By default, `use_supplier_order_id` is set to `false`. |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{supplier_id}/orders/{id}
+```
+
+## Update a supplier order
+
+Updates the fulfillment status of an existing supplier order.
+
+| Arguments |   |
+|-----------|---|
+| **supplier_id** integer, required | Unique identifier assigned to each supplier. |
+| **order_id** string, required | Unique external identifier for the supplier order. |
+| **id** string, required | Unique external identifier for an item in the supplier order. |
+| **use_supplier_order_id** string, optional | Dictates whether to use the supplier-supplied order id. By default, `use_supplier_order_id` is set to `false`. |
+| **order_item_status** string, required | Possible values are `pending`, `processing`, `sent`, `delivered`, `rejected`, `returned`, or `canceled`. |
+| **status_notes** string, optional | Notes that further describe details pertaining to the status |
+| **status_reason** string, optional | Reason code to describe the status. Possible values are `created`, `backorder`, `preorder`, `special order`, `order acknowledged`, `backorder released`, `preorder released`, `special order released`, `awaiting fulfillment`, `awaiting pickup`, `sent`, `item received`, `customer pickup`, `out of stock`, `member cap internal`, `segment cap internal`, `program cap internal`, `offer cap internal`, `member cap supplier`, `segment cap supplier`, `program cap supplier`, `offer cap supplier`, `canceled`, `cancel requested`, `returned`, or `return initiated`. |
+| **carrier_name** string, optional | Name of the shipping carrier. |
+| **carrier_tracking** string, optional | Tracking number provided by the shipping carrier. |
+| **carrier_url** string, optional | Shipping carrier's tracking url for the item. |
+| **carrier_delivery_date** string, optional | Shipping carrier's estimated delivery date. |
+| **detailed** boolean, optional | Dictates whether full order details are returned. By default, `detailed` is set to `false`. |
+| **adjustment_amount** decimal, optional | The amount to adjust the order total by — a positive amount increases the amount the rewards program owes the supplier, a negative amount decreases the amount the rewards program owers the supplier. |
+| **adjustment_description** string, optional | Description of the adjustment. |
+
+```nginx
+PATCH /api/v4/suppliers/{supplier_id}/orders/{order_id}/order_items/{id}
+```
