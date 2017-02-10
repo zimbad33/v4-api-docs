@@ -108,13 +108,31 @@ API Endpoints
 
 ## Items
 
+This set of endpoints facilitates the navigation of the rewards catalog by an end user.
+
+* List all items
+* Retrieve an item
+
 ## Supplier Items
 
-## Offers
+* Update a supplier item
 
 ## Orders
 
+This set of endpoints facilitates the placement of an order by a rewards program on behalf of an end user.
+
+* Create an order
+* List all orders
+* Retrieve an order
+* Update an order
+
 ## Supplier Orders
+
+* Create a supplier order
+* Create a supplier order asset
+* List all supplier orders
+* Retrieve a supplier order
+* Update a supplier order
 
 Items
 =====
@@ -857,6 +875,8 @@ Updates the fulfillment status of an existing supplier order.
 | **detailed** boolean, optional | Dictates whether full order details are returned. By default, `detailed` is set to `false`. |
 | **adjustment_amount** decimal, optional | The amount to adjust the order total by — a positive amount increases the amount the rewards program owes the supplier, a negative amount decreases the amount the rewards program owers the supplier. |
 | **adjustment_description** string, optional | Description of the adjustment. |
+
+##### Endpoint
 
 ```nginx
 PATCH /api/v4/suppliers/{supplier_id}/orders/{order_id}/order_items/{id}
