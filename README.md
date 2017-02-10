@@ -460,3 +460,151 @@ Offers
 | **ends_at** string | Offer end date |
 | **updated_at** string | Offer last updated date |
 
+Orders
+======
+
+The placement of an order (by a rewards programs or a supplier, on behalf of an end user) is handled through the creation of order objects. Orders are composed of several sub-objects: Member, Order Supplier, and Order Item.
+
+## The order object
+
+| Attributes |   |
+|------------|---|
+| **id** string | Unique RewardOps generated identifier |
+| **program_order_id** string | A reward program's internal order id, if supplied. |
+| **program_id** integer | Unique identifier assigned to the program where the order originated from |
+| **created_at** string | Order creation date |
+| **updated_at** string | Order last updated date |
+| **status** string | Possible values are `pending`, `partial`, `stopped`, or `inactive`. |
+| **payment_status** string | Possible values are `pending`, `paid`, `rejected`, or `refunded`. |
+| **member** object | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
+| **supplier** object | A [supplier object](#supplier) for the order. |
+
+##### Example order object
+
+```json
+{
+  "status": "OK",
+  "result": {
+    "order": {
+      "id": "56bbc2a4cf8e76",
+      "program_order_id": "10348439383",
+      "program_id": 1,
+      "created_at": "2016-02-19T21:34:21.668Z",
+      "updated_at": "2016-02-19T21:34:21.668Z",
+      "status": "PENDING",
+      "payment_status": "PAID",
+      "member": {
+        "id": "272827",
+        "full_name": "John Smith",
+        "email": "johnsmith@gmail.com",
+        "phone": "9174345456",
+        "address": {
+          "address": "123 Main Street",
+          "address_2": "Apt 203",
+          "city": "New York",
+          "country_code": "US",
+          "country_subregion_code": "NY",
+          "postal_code": "10012"
+        }
+      },
+      "suppliers": [
+        {
+          "name": "BestBuy",
+          "id": 22,
+          "member_paid":  {
+            "XRO-PTS": "100.00"
+          },
+          "program_cost": {
+            "USD": {
+              "currency_id": "1",
+              "shipping": "10.82982",
+              "handling": "0.0",
+              "handling_tax": "0.0",
+              "estimated_import_fees": "0.0",
+              "adjustments_total": "0.0"
+            }
+          },
+          "order_events": [],
+          "items": [
+            {
+              "id": "1c38c7e104b780",
+              "supplier_item_id": 1,
+              "name": "AAXA - M4 Pico DLP Portable Projector - White",
+              "type": "merchandise",
+              "description": "Watch the next big game or give a presentation with ease using this AAXA M4 MP-400-01 projector, which is cable-ready, so you can catch your favorite programs (antenna not included) on a screen size that adjusts from 15\" to 150\" to suit your needs.Not sure what size projector or screen you need? Learn more.",
+              "images": [
+                {
+                  "name": "primary",
+                  "description": "primary_photo",
+                  "sizes": {
+                    "350x350": "http://s3.amazonaws.com/pangea-app-development/item_variants/images/000/000/001/350x350/4338628_sa.jpg?1454024427",
+                    "74x74": "http://s3.amazonaws.com/pangea-app-development/item_variants/images/000/000/001/74x74/4338628_sa.jpg?1454024427",
+                    "46x46": "http://s3.amazonaws.com/pangea-app-development/item_variants/images/000/000/001/46x46/4338628_sa.jpg?1454024427"
+                  }
+                }
+              ],
+              "member_paid": {
+                "XRO-PTS": "5000.00"
+              },
+              "program_cost": {
+                "USD": {
+                  "item": "541.49",
+                  "tax": "48.06"
+                }
+              },
+              "retail_value": {},
+              "fulfillment": {
+                "terms_and_conditions": "",
+                "instructions": "Delivery to most areas within 3-5 business days",
+                "status": "PENDING",
+                "status_notes": null,
+                "supplier_order_id": "BBY01-2257931869483",
+                "carrier_name": "USPS",
+                "carrier_tracking": null,
+                "carrier_url": null,
+                "carrier_delivery_date": null
+              },
+              "assets": {}
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### The member sub-object
+
+| Attributes |   |
+|------------|---|
+| **id** string | Unique identifier assigned to each member of the program |
+| **full_name** string | First and last name of the member |
+| **email** string | Email address of the member |
+| **phone** string | Mobile phone number of the member |
+| **address** object | An [address object](#address) for the member, containing the mailing address of the member |
+
+### The address sub-object
+
+| Attributes |   |
+|------------|---|
+| **address** string | Address line 1 |
+| **address_2** string | Address line 2 |
+| **city** string | City |
+| **country_code** string | Country code (ISO 3116) |
+| **country_subregion_code** string | Sub-region code (ISO 3116)  |
+| **postal_code** string | Postal/Zip code |
+
+### The supplier sub-object
+
+| Attributes |   |
+|------------|---|
+| **id** integer | Unique identifier assigned to each supplier |
+| **name** string | Supplier name |
+| **member_paid** array | A collection of payments submitted by the reward program member |
+| **program_cost** object | A program cost object for the supplier |
+| **order_events** array | A collection of event |
+| **items** object | An item object for the supplier |
+
+### The program cost sub-object
+
