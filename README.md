@@ -601,10 +601,110 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 |------------|---|
 | **id** integer | Unique identifier assigned to each supplier |
 | **name** string | Supplier name |
-| **member_paid** array | A collection of payments submitted by the reward program member |
+| **member_paid** hash | Currency and amount reward program member paid for the item |
 | **program_cost** object | A program cost object for the supplier |
-| **order_events** array | A collection of event |
+| **order_events** object | An order event object for the supplier |
 | **items** object | An item object for the supplier |
 
 ### The program cost sub-object
+
+| Attributes |   |
+|------------|---|
+| **currency_id** string | Currency identifier  |
+| **shipping** decimal | Amount of shipping costs incurred by the reward program |
+| **handling** decimal | Amount of handling costs incurred by the reward program |
+| **handling_tax** decimal | Amount of handling tax costs incurred by the reward program |
+| **estimated_import_fees** decimal | Amount of estimated import fee costs incurred by the reward program |
+| **adjustments_total** decimal | Total amount of adjustments to the cost of an order |
+
+### The order event sub-object
+
+| Attributes |   |
+|------------|---|
+| **description** string | A description of the order event. |
+| **type** string | Possible values are `notice`, `refund`, or `fee`. |
+| **date** string | Order event date. |
+| **amount** decimal | Currency and amount of adjustment to the cost of the order. |
+
+### The order supplier items sub-object
+
+| Attributes |   |
+|------------|---|
+| **id** integer | Unique RewardOps generated identifier |
+| **supplier_item_id** integer | Unique identifier for the supplier item variant |
+| **name** string | Item name |
+| **type** string | Possible values are `merchandise`, `gift_card`, `periodical`, `donation`, `event`, `travel`, `music`, `video`, `book`, `discount`, or `discount`. |
+| **description** string | Item description |
+| **images** object | An [images object](#images) for the item |
+| **member_paid** hash | Currency and amount reward program member paid for the item |
+| **program_cost** object | The program cost object for the order supplier item, containing the currency and amount program paid for the item (including sales tax). |
+| **retail_value** decimal | Retail value of item |
+| **fulfillment** object | The fulfillment object for the order supplier item. |
+| **assets** object | An [assets object](#assets) for the item |
+
+### The fulfillment sub-object
+
+| Attributes |   |
+|------------|---|
+| **terms_and_conditions** string | Supplier-specific terms and conditions. |
+| **instructions** string | Supplier-specific details pertaining to the delivery of the delivery of the reward. |
+| **status** string | Possible values are `pending`, `processing`, `sent`, `delivered`, `rejected`, `returned`, or `canceled`. |
+| **status_notes** string | notes that further describe details pertaining to the status |
+| **supplier_order_id** string | order id provided by the supplier |
+| **carrier_name** string | Name of the shipping carrier. |
+| **carrier_tracking** string | Tracking number provided by the shipping carrier. |
+| **carrier_url** string | Shipping carrier's tracking url for the item. |
+| **carrier_delivery_date** string | Shipping carrier's estimated delivery date. |
+
+### The asset sub-object
+
+| Attributes |   |
+|------------|---|
+| **codes** array of codes | An array of code assets that are required to redeem a reward. |
+| **links** array of links | An array of link assets that are required to redeem a reward. |
+| **images** array of images | An array of image assets that are required to redeem a reward. |
+
+### The code sub-object
+
+| Attributes |   |
+|------------|---|
+| **label** string | Name of the asset being delivered. Defined by the brand providing the reward. (eg. Promo Code, Pin Code, Barcode) |
+| **type** string | Type of reward asset. PLAIN is currently the only type. |
+| **value** string | The code asset, delivered as an alphanumeric code. |
+
+### The link sub-object
+
+| Attributes |   |
+|------------|---|
+| **label** string | Name of the asset being delivered. Defined by the brand providing the reward. (eg. Website, Magazine, MP3, eBook) |
+| **type** string | Type of reward asset. Options for external asset types include DOWNLOAD and REDIRECT. |
+| **value** string | The link asset, delivered as a URL. |
+
+### The image sub-object
+
+| Attributes |   |
+|------------|---|
+| **label** string | Name of the asset being delivered. Defined by the brand providing the reward. (eg. Barcode, Certificate, Coupon) |
+| **type** string | Type of reward asset. PLAIN is currently the only type. |
+| **value** string | The image asset, delivered as a URL. |
+
+## Create an order
+
+Creates a new order object, specific to rewards programs.
+
+| Arguments |   |
+|-----------|---|
+| **program_id** integer, required | Unique identifier assigned to each rewards program. |
+| **program_order_id** string, optional | A unique identifier supplied by the rewards program. |
+| **payment_status** string, optional | Possible values are `PAID`, `PENDING`, `REJECTED`, or `REFUNDED`. By default, `payment_status` is set to `PAID`. |
+| **payment_status_notes** string, optional | Notes pertaining to the payment status. |
+| **detailed** boolean, optional | When set to true, full order details are returned/provided. |
+| **items** object, required | A collection of items included in this order. |
+| **member** object, required | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
+
+##### Endpoint
+
+```nginx
+POST /api/v4/programs/{program_id}/orders
+```
 
