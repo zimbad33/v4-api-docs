@@ -708,3 +708,58 @@ Creates a new order object, specific to rewards programs.
 POST /api/v4/programs/{program_id}/orders
 ```
 
+## List all orders
+
+Returns a list of orders for a specific member in your rewards program. The orders are returned sorted by reverse chronological order.
+
+| Arguments |   |
+|-----------|---|
+| **member_id** integer, required | Unique identifier assigned to each member |
+| **program_id** integer, required | Unique identifier assigned to each program |
+| **detailed** boolean, optional | The type of list returned |
+| **start_date** string, optional | Start date of date range to query for orders. |
+| **end_date** string, optional | End date of date range to query for orders. |
+| **page** tag, optional | The page number to return. |
+| **per_page_count** integer, optional | Number of orders returned per page. |
+| **sort_by** string, optional | Sort reward results [newest, oldest]. |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{program_id}/orders
+```
+
+## Retrieve an order
+
+Retrieves the details of an existing order, specific to rewards programs.
+
+| Arguments |   |
+|-----------|---|
+| **id** string, required | Unique identifier for the order |
+| **program_id** integer, required | Unique identifier assigned to each program |
+| **use_program_order_id** boolean, optional | Dictates whether to use the program-supplied order id. By default, `use_program_order_id` is set to `false`.
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{program_id}/orders/{id}
+```
+
+## Update an order
+
+Updates the payment status of an existing order, specific to rewards programs.
+
+| Arguments |   |
+|-----------|---|
+| **program_id** integer, required | Unique identifier assigned to each program |
+| **id** string, required | Unique identifier for the order |
+| **payment_status** string, optional | Possible values are `PAID`, `PENDING`, `REJECTED`, or `REFUNDED`. By default, `payment_status` is set to `PAID`. |
+| **payment_status_notes** string, optional | Notes pertaining to the payment status. |
+
+```nginx
+PATCH /api/v4/programs/{program_id}/orders/{id}
+```
+
+Supplier Orders
+===============
+
