@@ -373,6 +373,7 @@ Returns a list of program items.
 |-----------|---|
 | **program_id** integer, required | Unique identifier assigned to each program item |
 | **segment_id** integer, optional | Unique identifier assigned to each program segment |
+| **filter** string, optional | A filter query string parameter limits the data returned by this call |
 | **q** string, optional | Search term in item name, description, or notes |
 | **page** integer, optional | The page number returned |
 | **page_per_count** integer, optional | Records returned per page |
@@ -415,7 +416,7 @@ Supplier Items
 | **reviews_rating** decimal | Review rating for the supplier item |
 | **order_token** string | Token used when ordering the supplier item variant |
 | **geo_targeting** object | A [geo targeting object](#geo-targeting) for the supplier item variant |
-| **fulfillment** object | A [fulfillment object](#fulfillment) for the supplier item variant |
+| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub-object) for the supplier item variant |
 | **pricing** object | A [pricing object](#pricing) for the supplier item variant |
 
 ### The geo targeting sub-object
@@ -425,7 +426,7 @@ Supplier Items
 | **include** array | A collection of regions and sub-regions to include |
 | **exclude** array | A collection of regions and sub-regions to exclude |
 
-### The fulfillment sub-object
+### The fulfillment sub object
 
 | Attributes |   |
 |------------|---|
