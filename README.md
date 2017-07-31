@@ -137,7 +137,7 @@ This set of endpoints facilitates the placement of an order by a rewards program
 Items
 =====
 
-Items which will appear in your rewards catalog are stored in item objects, and item objects are composed of item variant objects along with several sub-objects: Categories, Brands, Properties, Variant Properties, and Images.
+Items which will appear in your rewards catalog are stored in item objects, and item objects are composed of item variant objects along with several sub objects: Categories, Brands, Properties, Variant Properties, and Images.
 
 ## The item variant object
 
@@ -152,11 +152,11 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **specifications** string | Item specifications |
 | **notes** string | Item notes |
 | **related_items** array | A collection of item ids that are similar to the originating item id |
-| **categories** object | A [categories object](#categories) for the item |
-| **brands** object, optional | A [brands object](#brands) for the item |
-| **properties** object, optional | A [properties object](#properties) for the item |
-| **variant_properties** object, optional | A [variant properties object](#variant-properties) for the item |
-| **images** object | An [images object](#images) for the item |
+| **categories** object | A [categories object](#the-categories-sub-object) for the item |
+| **brands** object, optional | A [brands object](#the-brands-sub-object) for the item |
+| **properties** object, optional | A [properties object](#the-properties-sub-object) for the item |
+| **variant_properties** object, optional | A [variant properties object](#the-variant-properties-sub-object) for the item |
+| **images** object | An [images object](#the-images-sub-object) for the item |
 
 ##### Example item object
 
@@ -322,7 +322,7 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 }
 ```
 
-### The categories sub-object
+### The categories sub object
 
 | Attributes |   |
 |------------|---|
@@ -330,7 +330,7 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **code** string | Unique identifier assigned to each category |
 | **labels** string | Labels associated with the items category |
 
-### The brands sub-object
+### The brands sub object
 
 | Attributes |   |
 |------------|---|
@@ -338,7 +338,7 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **url** string | Url of the brand |
 | **image_url** string | Url of the brand logo |
 
-### The properties sub-object
+### The properties sub object
 
 | Attributes |   |
 |------------|---|
@@ -346,7 +346,7 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **key** string | Property key |
 | **value** string | Property value |
 
-### The variant properties sub-object
+### The variant properties sub object
 
 | Attributes |   |
 |------------|---|
@@ -355,7 +355,7 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **value** string | Variant property value |
 | **other_variants** hash, optional | A collection of item ids and names for variant properties |
 
-### The images sub-object
+### The images sub object
 
 | Attributes |   |
 |------------|---|
@@ -415,11 +415,11 @@ Supplier Items
 | **product_url** string | URL for the supplier item |
 | **reviews_rating** decimal | Review rating for the supplier item |
 | **order_token** string | Token used when ordering the supplier item variant |
-| **geo_targeting** object | A [geo targeting object](#geo-targeting) for the supplier item variant |
-| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub-object) for the supplier item variant |
-| **pricing** object | A [pricing object](#pricing) for the supplier item variant |
+| **geo_targeting** object | A [geo targeting object](#the-geo-targeting-sub object) for the supplier item variant |
+| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub object) for the supplier item variant |
+| **pricing** object | A [pricing object](#the-pricing-sub object) for the supplier item variant |
 
-### The geo targeting sub-object
+### The geo targeting sub object
 
 | Attributes |   |
 |------------|---|
@@ -438,7 +438,7 @@ Supplier Items
 | **handling_included** boolean | Indicates whether shipping is included in the final member price |
 | **handling_estimate** decimal | Estimated handling cost |
 
-### The pricing sub-object
+### The pricing sub object
 
 | Attributes |   |
 |------------|---|
@@ -482,7 +482,7 @@ Offers
 Orders
 ======
 
-The placement of an order (by a rewards programs or a supplier, on behalf of an end user) is handled through the creation of order objects. Orders are composed of several sub-objects: Member, Order Supplier, and Order Item.
+The placement of an order (by a rewards programs or a supplier, on behalf of an end user) is handled through the creation of order objects. Orders are composed of several sub objects: Member, Order Supplier, and Order Item.
 
 ## The order object
 
@@ -495,8 +495,8 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **updated_at** string | Order last updated date |
 | **status** string | Possible values are `pending`, `partial`, `stopped`, or `inactive`. |
 | **payment_status** string | Possible values are `pending`, `paid`, `rejected`, or `refunded`. |
-| **member** object | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
-| **supplier** object | A [supplier object](#supplier) for the order. |
+| **member** object | A [member object](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
+| **supplier** object | A [supplier object](#the-supplier-sub-object) for the order. |
 
 ##### Example order object
 
@@ -593,7 +593,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 }
 ```
 
-### The member sub-object
+### The member sub object
 
 | Attributes |   |
 |------------|---|
@@ -601,9 +601,9 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **full_name** string | First and last name of the member |
 | **email** string | Email address of the member |
 | **phone** string | Mobile phone number of the member |
-| **address** object | An [address object](#address) for the member, containing the mailing address of the member |
+| **address** object | An [address object](#the-address-sub-object) for the member, containing the mailing address of the member |
 
-### The address sub-object
+### The address sub object
 
 | Attributes |   |
 |------------|---|
@@ -614,7 +614,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **country_subregion_code** string | Sub-region code (ISO 3116)  |
 | **postal_code** string | Postal/Zip code |
 
-### The supplier sub-object
+### The supplier sub object
 
 | Attributes |   |
 |------------|---|
@@ -625,7 +625,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **order_events** object | An order event object for the supplier |
 | **items** object | An item object for the supplier |
 
-### The program cost sub-object
+### The program cost sub object
 
 | Attributes |   |
 |------------|---|
@@ -636,7 +636,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **estimated_import_fees** decimal | Amount of estimated import fee costs incurred by the reward program |
 | **adjustments_total** decimal | Total amount of adjustments to the cost of an order |
 
-### The order event sub-object
+### The order event sub object
 
 | Attributes |   |
 |------------|---|
@@ -645,7 +645,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **date** string | Order event date. |
 | **amount** decimal | Currency and amount of adjustment to the cost of the order. |
 
-### The order supplier items sub-object
+### The order supplier items sub object
 
 | Attributes |   |
 |------------|---|
@@ -654,14 +654,14 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **name** string | Item name |
 | **type** string | Possible values are `merchandise`, `gift_card`, `periodical`, `donation`, `event`, `travel`, `music`, `video`, `book`, `discount`, or `discount`. |
 | **description** string | Item description |
-| **images** object | An [images object](#images) for the item |
+| **images** object | An [images object](#the-images-sub-object) for the item |
 | **member_paid** hash | Currency and amount reward program member paid for the item |
 | **program_cost** object | The program cost object for the order supplier item, containing the currency and amount program paid for the item (including sales tax). |
 | **retail_value** decimal | Retail value of item |
 | **fulfillment** object | The fulfillment object for the order supplier item. |
-| **assets** object | An [assets object](#assets) for the item |
+| **assets** object | An [assets object](#the-assets-sub-object) for the item |
 
-### The fulfillment sub-object
+### The fulfillment sub object
 
 | Attributes |   |
 |------------|---|
@@ -675,7 +675,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **carrier_url** string | Shipping carrier's tracking url for the item. |
 | **carrier_delivery_date** string | Shipping carrier's estimated delivery date. |
 
-### The asset sub-object
+### The asset sub object
 
 | Attributes |   |
 |------------|---|
@@ -683,7 +683,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **links** array of links | An array of link assets that are required to redeem a reward. |
 | **images** array of images | An array of image assets that are required to redeem a reward. |
 
-### The code sub-object
+### The code sub object
 
 | Attributes |   |
 |------------|---|
@@ -691,7 +691,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **type** string | Type of reward asset. PLAIN is currently the only type. |
 | **value** string | The code asset, delivered as an alphanumeric code. |
 
-### The link sub-object
+### The link sub object
 
 | Attributes |   |
 |------------|---|
@@ -699,7 +699,7 @@ The placement of an order (by a rewards programs or a supplier, on behalf of an 
 | **type** string | Type of reward asset. Options for external asset types include DOWNLOAD and REDIRECT. |
 | **value** string | The link asset, delivered as a URL. |
 
-### The image sub-object
+### The image sub object
 
 | Attributes |   |
 |------------|---|
@@ -719,7 +719,7 @@ Creates a new order object, specific to rewards programs.
 | **payment_status_notes** string, optional | Notes pertaining to the payment status. |
 | **detailed** boolean, optional | When set to true, full order details are returned/provided. |
 | **items** object, required | A collection of items included in this order. |
-| **member** object, required | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
+| **member** object, required | A [member object](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
 
 ##### Endpoint
 
@@ -795,7 +795,7 @@ Creates a new supplier order object.
 | **detailed** boolean, optional | When set to true, full order details are returned/provided. By default, `detailed` is set to `false`. | **member_paid** object, required | A member paid object for the supplier order. |
 | **program_cost** object, required | A program cost object for the supplier order. |
 | **items** object, required | A collection of supplier items included in this order. |
-| **member** object, required | A [member object](#member) for the order, containing details of the reward program member that placed the order. |
+| **member** object, required | A [member object](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
 
 ##### Endpoint
 
