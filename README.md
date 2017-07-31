@@ -432,9 +432,9 @@ Supplier Items
 | **requirement** array | A collection of member details that must be submitted to fulfill the item |
 | **instructions** string | Supplier-specific fulfillment instructions that should be displayed to the member |
 | **terms_and_conditions** string | Supplier-specific terms and conditions that should be displayed to the member |
-| **shipping_included** boolean | Indicates that shipping is included in the final member price |
+| **shipping_included** boolean | Indicates whether shipping is included in the final member price |
 | **shipping_estimate** decimal | Estimated shipping cost |
-| **handling_included** boolean | Indicates that shipping is included in the final member price |
+| **handling_included** boolean | Indicates whether shipping is included in the final member price |
 | **handling_estimate** decimal | Estimated handling cost |
 
 ### The pricing sub-object
