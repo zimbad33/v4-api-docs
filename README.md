@@ -134,8 +134,8 @@ A filter is comprised of one or many comparisons, chained together with boolean 
 | **LABEL** | `String`, `Integer`; Supported Labels: Brand, Artist |
 | **CATEGORY** | `Integer`(ID), `String` (Code); `Boolean` (to include full subtree) |
 | **CCATEGORY** | `Integer`(ID), `String` (Code); `Boolean` (to include full subtree) |
-| **PROPERTY** | `Integer`(ID), `String` (Code); |
-| **CPROPERTY** | `Integer`(ID), `String` (Code); |
+| **PROPERTY** | `Integer (ID)`, `String (Code)`; |
+| **CPROPERTY** | `Integer (ID)`, `String (Code)`; |
 
 ## Boolean Operators
 
@@ -187,10 +187,6 @@ This set of endpoints facilitates the navigation of the rewards catalog by an en
 * List all items
 * Retrieve an item
 
-## Supplier Items
-
-* Update a supplier item
-
 ## Orders
 
 This set of endpoints facilitates the placement of an order by a rewards program on behalf of an end user.
@@ -213,24 +209,24 @@ Items
 
 Items which will appear in your rewards catalog are stored in item objects, and item objects are composed of item variant objects along with several sub objects: Categories, Brands, Properties, Variant Properties, and Images.
 
-## The item variant object
+## The item object
 
 | Attributes |   |
 |------------|---|
 | **id** integer | Unique identifier assigned to each item |
-| **type** string | Item type (Merchandise, Gift Card, Periodical, Donation, Event, Travel, Music, Video, Book, Discount, Offsite) |
 | **name** string | Item name |
 | **model** string | Manufacturer item model number |
 | **industry_id** string | Universal product code (UPC) |
+| **images** object | An [images object](#the-images-sub-object) for the item |
+| **type** string | Item type (Merchandise, Gift Card, Periodical, Donation, Event, Travel, Music, Video, Book, Discount, Offsite) |
 | **description** string | Item description |
 | **specifications** string | Item specifications |
 | **notes** string | Item notes |
-| **related_items** array | A collection of item ids that are similar to the originating item id |
 | **categories** object | A [categories object](#the-categories-sub-object) for the item |
 | **brands** object, optional | A [brands object](#the-brands-sub-object) for the item |
 | **properties** object, optional | A [properties object](#the-properties-sub-object) for the item |
 | **variant_properties** object, optional | A [variant properties object](#the-variant-properties-sub-object) for the item |
-| **images** object | An [images object](#the-images-sub-object) for the item |
+| **supplier_items** object | A [supplier item variant object](#the-supplier-item-variant-sub-object) for the item |
 
 ##### Example item object
 
@@ -396,6 +392,58 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 }
 ```
 
+### The supplier item variant sub object
+
+| Attributes |   |
+|------------|---|
+| **id** string | Unique RewardOps identifier for the supplier item variant |
+| **external_supplier_id** string | Unique identifier assigned to each supplier item |
+| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub object) for the supplier item variant |
+| **pricing** object | A [pricing object](#the-pricing-sub object) for the supplier item variant |
+| **order_token** string | Token used when ordering the supplier item variant |
+| **availability_status** string | Indicates the availability of the item in the catalog. Possible values are `available`, `out_of_stock`, or `inactive` |
+| **offer** | An [offer object](#the-offer-sub object) describes the details of the supplier's item offer to the program|
+| **geo_targeting** object | A [geo targeting object](#the-geo-targeting-sub object) for the supplier item variant |
+
+### The geo targeting sub object
+
+| Attributes |   |
+|------------|---|
+| **include** array | A collection of regions and sub-regions to include |
+| **exclude** array | A collection of regions and sub-regions to exclude |
+
+### The fulfillment sub object
+
+| Attributes |   |
+|------------|---|
+| **requirement** array | A collection of member details that must be submitted to fulfill the item |
+| **instructions** string | Supplier-specific fulfillment instructions that should be displayed to the member |
+| **terms_and_conditions** string | Supplier-specific terms and conditions that should be displayed to the member |
+| **shipping_included** boolean | Indicates whether shipping is included in the final member price |
+| **shipping_estimate** decimal | Estimated shipping cost |
+| **handling_included** boolean | Indicates whether shipping is included in the final member price |
+| **handling_estimate** decimal | Estimated handling cost |
+
+### The pricing sub object
+
+| Attributes |   |
+|------------|---|
+| **regular_price** decimal | An item's regular price |
+| **sale_price** decimal | An item's sale price |
+| **tax_eligible** boolean | Incremental cost for sales tax |
+
+### The offer sub object
+
+| Attributes |   |
+|------------|---|
+| **id** integer | Unique identifier assigned to each offer |
+| **name** string | Offer name |
+| **supplier_id** integer | Unique identifier of the supplier |
+| **type** string | Offer type |
+| **starts_at** string | Offer start date |
+| **ends_at** string | Offer end date |
+| **updated_at** string | Offer last updated date |
+
 ### The categories sub object
 
 | Attributes |   |
@@ -475,83 +523,6 @@ Retrieves the deatils of an item.
 ```nginx
 GET /api/v4/programs/{program_id}/items/{id}
 ```
-
-Supplier Items
-==============
-
-## The supplier item variant object
-
-| Attributes |   |
-|------------|---|
-| **id** string | Unique RewardOps identifier for the supplier item variant |
-| **external_supplier_id** string | Unique identifier assigned to each supplier item |
-| **labels** array | A collection of program specific labels |
-| **product_url** string | URL for the supplier item |
-| **reviews_rating** decimal | Review rating for the supplier item |
-| **order_token** string | Token used when ordering the supplier item variant |
-| **geo_targeting** object | A [geo targeting object](#the-geo-targeting-sub object) for the supplier item variant |
-| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub object) for the supplier item variant |
-| **pricing** object | A [pricing object](#the-pricing-sub object) for the supplier item variant |
-
-### The geo targeting sub object
-
-| Attributes |   |
-|------------|---|
-| **include** array | A collection of regions and sub-regions to include |
-| **exclude** array | A collection of regions and sub-regions to exclude |
-
-### The fulfillment sub object
-
-| Attributes |   |
-|------------|---|
-| **requirement** array | A collection of member details that must be submitted to fulfill the item |
-| **instructions** string | Supplier-specific fulfillment instructions that should be displayed to the member |
-| **terms_and_conditions** string | Supplier-specific terms and conditions that should be displayed to the member |
-| **shipping_included** boolean | Indicates whether shipping is included in the final member price |
-| **shipping_estimate** decimal | Estimated shipping cost |
-| **handling_included** boolean | Indicates whether shipping is included in the final member price |
-| **handling_estimate** decimal | Estimated handling cost |
-
-### The pricing sub object
-
-| Attributes |   |
-|------------|---|
-| **regular_price** decimal | An item's regular price |
-| **sale_price** decimal | An item's sale price |
-| **tax_eligible** boolean | Incremental cost for sales tax |
-
-## Update a supplier item
-
-Updates the availability status and pricing of an item.
-
-| Arguments |   |
-|-----------|---|
-| **external_supplier_id** integer, required | Unique identifier assigned to each supplier item |
-| **availability_status** string, required | Possible values are `available`, `out_of_stock`, or `inactive`. Dictates whether a supplier item can be ordered. |
-| **regular_price** integer, optional | Supplier item's regular price |
-| **sale_price** integer, optional | Supplier item's sale price |
-
-
-##### Endpoint
-
-```nginx
-PATCH /api/v4/suppliers/{supplier_id}/items/{id}}
-```
-
-Offers
-======
-
-## The offer object
-
-| Attributes |   |
-|------------|---|
-| **id** integer | Unique identifier assigned to each offer |
-| **name** string | Offer name |
-| **supplier_id** integer | Unique identifier of the supplier |
-| **type** string | Offer type |
-| **starts_at** string | Offer start date |
-| **ends_at** string | Offer end date |
-| **updated_at** string | Offer last updated date |
 
 Orders
 ======
