@@ -399,12 +399,12 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 |------------|---|
 | **id** string | Unique RewardOps identifier for the supplier item variant |
 | **external_supplier_id** string | Unique identifier assigned to each supplier item |
-| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub object) for the supplier item variant |
-| **pricing** object | A [pricing object](#the-pricing-sub object) for the supplier item variant |
+| **fulfillment** object | A [fulfillment object](#the-fulfillment-sub-object) for the supplier item variant |
+| **pricing** object | A [pricing object](#the-pricing-sub-object) for the supplier item variant |
 | **order_token** string | Token used when ordering the supplier item variant |
 | **availability_status** string | Indicates the availability of the item in the catalog. Possible values are `available`, `out_of_stock`, or `inactive` |
-| **offer** | An [offer object](#the-offer-sub object) describes the details of the supplier's item offer to the program|
-| **geo_targeting** object | A [geo targeting object](#the-geo-targeting-sub object) for the supplier item variant |
+| **offer** | An [offer object](#the-offer-sub-object) describes the details of the supplier's item offer to the program|
+| **geo_targeting** object | A [geo targeting object](#the-geo-targeting-sub-object) for the supplier item variant |
 
 ### The geo targeting sub object
 
