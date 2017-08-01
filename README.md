@@ -112,7 +112,7 @@ A filter is comprised of one or many comparisons, chained together with boolean 
 
 ## Filter Descriptions
 
-| Types |   |
+| Filter | Description  |
 |-------|---|
 | **ID** | Match against a specific supplier_item id |
 | **REGULAR_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
@@ -126,24 +126,23 @@ A filter is comprised of one or many comparisons, chained together with boolean 
 
 ## Filter Parameters
 
-| Types |   |
+| Filter | Identifier  |
 |-------|---|
-| **ID** | Match against a specific supplier_item id |
-| **REGULAR_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
-| **SALE_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
-| **LABEL** | Match against item labels of the following type: `Brand`, `Artist` |
-| **CLABEL** | Match against item labels of the following type: `Filter`, `Pricing` |
-| **CATEGORY** | Match against an item category, specified in parenthesis (an ID or category code). The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of its children categories |
-| **CCATEGORY** | Match against an item custom category, specified in parenthesis (an ID or custom category code).  The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of it's children categories |
-| **PROPERTY** | Match against a property, specified in parenthesis (an ID or property in within quotation marks). |
-| **CPROPERTY** | Match against a custom property, specified in parenthesis (an ID or property in within quotation marks). |
+| **ID** | `Integer` |
+| **REGULAR_PRICE** | `Integer` |
+| **SALE_PRICE** | `Integer` |
+| **LABEL** | `String`, `Integer`; Supported Labels: Brand, Artist |
+| **CATEGORY** | `Integer`(ID), `String` (Code); `Boolean` (to include full subtree) |
+| **CCATEGORY** | `Integer`(ID), `String` (Code); `Boolean` (to include full subtree) |
+| **PROPERTY** | `Integer`(ID), `String` (Code); |
+| **CPROPERTY** | `Integer`(ID), `String` (Code); |
 
 ## Boolean Operators
 
 | Types |   |
 |-------|---|
 | **&** | Logical AND |
-| **`|`** | Logical OR |
+| **|** | Logical OR |
 
 ## Comparison Operators
 
