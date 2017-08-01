@@ -184,8 +184,9 @@ API Endpoints
 
 This set of endpoints facilitates the navigation of the rewards catalog by an end user.
 
-* List all items
-* Retrieve an item
+* List all items (bulk call)
+* List all items (in an optional segment)
+* Retrieve an item (by item id for a program, in an optional segment)
 
 ## Orders
 
@@ -487,6 +488,31 @@ Items which will appear in your rewards catalog are stored in item objects, and 
 | **74x74** string | Url of the image with a resolution of 74x74 |
 | **46x46** string | Url of the image with a resolution of 46x46 |
 
+## List all items (bulk call)
+
+Returns a list of program items.
+
+| Arguments |   |
+|-----------|---|
+| **program_id** integer, required | Unique identifier assigned to each program item |
+| **segment_id** integer, optional | Unique identifier assigned to each program segment |
+| **start_date** string (ISO8601 Combined date and time in UTC), required | Start Date for date range of changed items | 
+| **end_date** string (ISO8601 Combined date and time in UTC), optional | End Date for date range of changed items | 
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US' |
+| **filter** integer, optional | Full filter specification |
+| **page** integer, optional | The page number returned |
+| **page_per_count** integer, optional | Records returned per page |
+| **filter_category_code** string, optional | (DEPRECATED: See FILTER) Filter (Program) category code to filter results by |
+| **filter_category_subtree** string, optional | DEPRECATED: See FILTER) Boolean indicating if the full subtree of the provided filter category code should be included |
+| **category_code** string, optional | (DEPRECATED: See FILTER) (System) Category code to filter results by |
+| **category_subtree** boolean, optional | (DEPRECATED: See FILTER) Boolean indicating if the full subtree of the provided system category code should be included |
+
+##### Endpoint
+
+```nginx
+GET /api/v4/programs/{program_id}/items/bulk
+```
+
 ## List all items
 
 Returns a list of program items.
@@ -495,11 +521,17 @@ Returns a list of program items.
 |-----------|---|
 | **program_id** integer, required | Unique identifier assigned to each program item |
 | **segment_id** integer, optional | Unique identifier assigned to each program segment |
-| **filter** string, optional | A filter query string parameter limits the data returned by this call |
-| **q** string, optional | Search term in item name, description, or notes |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US' |
+| **detailed** integer, optional | Return detailed objects (defaults to false) |
+| **sort_by** string, optional | Sort results by [["name", "sale_price", "created_date"]] |
+| **sort_order** string, optional | Order the results [ascending, descending] |
 | **page** integer, optional | The page number returned |
 | **page_per_count** integer, optional | Records returned per page |
-| **locale_code** string, optional | Language and locale for member-facing fields |
+| **q** integer, optional | Search term in item name, model, industry id and description |
+| **filter_category_code** string, optional | (DEPRECATED: See FILTER) Filter (Program) category code to filter results by |
+| **filter_category_subtree** string, optional | DEPRECATED: See FILTER) Boolean indicating if the full subtree of the provided filter category code should be included |
+| **category_code** string, optional | (DEPRECATED: See FILTER) (System) Category code to filter results by |
+| **category_subtree** boolean, optional | (DEPRECATED: See FILTER) Boolean indicating if the full subtree of the provided system category code should be included |
 
 ##### Endpoint
 
@@ -516,7 +548,7 @@ Retrieves the deatils of an item.
 | **id** integer, required | Unique identifier assigned to each program item |
 | **program_id** integer, required | Unique identifier assigned to each program |
 | **segment_id** integer, optional | Unique identifier assigned to each program segment |
-| **locale_code** string, optional | Language and locale for member-facing fields |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US' |
 
 ##### Endpoint
 
