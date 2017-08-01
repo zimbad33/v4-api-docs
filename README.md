@@ -103,6 +103,81 @@ The API employs standard HTTP status codes to indicate the general success or fa
 }
 ```
 
+Filters
+============
+
+The filter query string parameter restricts the number of entries returned by an API call. Filters can currently be applied against the `GET Items` and `GET Items Bulk` calls.
+
+A filter is comprised of one or many comparisons, chained together with boolean operations.
+
+## Filter Descriptions
+
+| Types |   |
+|-------|---|
+| **ID** | Match against a specific supplier_item id |
+| **REGULAR_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
+| **SALE_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
+| **LABEL** | Match against item labels of the following type: `Brand`, `Artist` |
+| **CLABEL** | Match against item labels of the following type: `Filter`, `Pricing` |
+| **CATEGORY** | Match against an item category, specified in parenthesis (an ID or category code). The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of its children categories |
+| **CCATEGORY** | Match against an item custom category, specified in parenthesis (an ID or custom category code).  The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of it's children categories |
+| **PROPERTY** | Match against a property, specified in parenthesis (an ID or property in within quotation marks). |
+| **CPROPERTY** | Match against a custom property, specified in parenthesis (an ID or property in within quotation marks). |
+
+## Filter Parameters
+
+| Types |   |
+|-------|---|
+| **ID** | Match against a specific supplier_item id |
+| **REGULAR_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
+| **SALE_PRICE** | Match against a supplier_item price, in subunits of the price currency (ex. for dollars, $10 = 1000 (one thousand cents) |
+| **LABEL** | Match against item labels of the following type: `Brand`, `Artist` |
+| **CLABEL** | Match against item labels of the following type: `Filter`, `Pricing` |
+| **CATEGORY** | Match against an item category, specified in parenthesis (an ID or category code). The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of its children categories |
+| **CCATEGORY** | Match against an item custom category, specified in parenthesis (an ID or custom category code).  The comparison value must be true or false, indicating whether to match against only the specified category or the specified category and all of it's children categories |
+| **PROPERTY** | Match against a property, specified in parenthesis (an ID or property in within quotation marks). |
+| **CPROPERTY** | Match against a custom property, specified in parenthesis (an ID or property in within quotation marks). |
+
+## Boolean Operators
+
+| Types |   |
+|-------|---|
+| **&** | Logical AND |
+| **`|`** | Logical OR |
+
+## Comparison Operators
+
+| Types |   |
+|-------|---|
+| **==** | Equals |
+| **!=** | Not Equal |
+| **>** | Equals |
+| **<** | Not Equal |
+| **>=** | Greater than or equal to |
+| **<=** | Less than or equal to |
+
+## Examples
+
+#### Filter items by category `CAT_SYS_000005`
+
+```/api/v4/programs/6254/items?filter=CATEGORY("CAT_SYS_000005")==true```
+
+#### Filter items by categories `CAT_SYS_000005` OR `CAT_SYS_000006`
+
+```/api/v4/programs/6254/items?filter=CATEGORY("CAT_SYS_000005")==true|CATEGORY("CAT_SYS_000006")==true```
+
+#### Filter items by property variant `color` equal to `Black`
+
+```/api/v4/programs/6254/items?filter=PROPERTY("color")=="Black"```
+
+#### Filter items by brand `Samsung` and category `CAT_SYS_000010 (Phones)`
+
+`/api/v4/programs/6254/items?filter=LABEL(Brand)=="Samsung"&CATEGORY("CAT_SYS_000010")=="true"`
+
+#### Filter items by regular price greater than or equal to $10.99
+
+`/api/v4/programs/6254/items?filter=REGULAR_PRICE>=1099`
+
 API Endpoints
 =============
 
