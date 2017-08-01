@@ -157,25 +157,25 @@ A filter is comprised of one or many comparisons, chained together with boolean 
 
 ## Examples
 
-### Filter items by category `CAT_SYS_000005`
+### Filter items by category CAT_SYS_000005
 
 ```/api/v4/programs/6254/items?filter=CATEGORY("CAT_SYS_000005")==true```
 
-### Filter items by categories `CAT_SYS_000005` OR `CAT_SYS_000006`
+### Filter items by categories CAT_SYS_000005 OR CAT_SYS_000006
 
 ```/api/v4/programs/6254/items?filter=CATEGORY("CAT_SYS_000005")==true|CATEGORY("CAT_SYS_000006")==true```
 
-### Filter items by property variant `color` equal to `Black`
+### Filter items by property variant color equal to Black
 
 ```/api/v4/programs/6254/items?filter=PROPERTY("color")=="Black"```
 
-### Filter items by brand `Samsung` and category `CAT_SYS_000010 (Phones)`
+### Filter items by brand Samsung and category CAT_SYS_000010 (Phones)
 
-`/api/v4/programs/6254/items?filter=LABEL(Brand)=="Samsung"&CATEGORY("CAT_SYS_000010")=="true"`
+```/api/v4/programs/6254/items?filter=LABEL(Brand)=="Samsung"&CATEGORY("CAT_SYS_000010")=="true"```
 
-#### Filter items by regular price greater than or equal to $10.99
+### Filter items by regular price greater than or equal to $10.99
 
-`/api/v4/programs/6254/items?filter=REGULAR_PRICE>=1099`
+```/api/v4/programs/6254/items?filter=REGULAR_PRICE>=1099```
 
 API Endpoints
 =============
