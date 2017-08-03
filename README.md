@@ -799,6 +799,12 @@ Creates a new order object, specific to rewards programs.
 | **member** object, required | A [member](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
 | **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
 
+##### Endpoint
+
+```nginx
+POST /api/v4/programs/{program_id}/orders
+```
+
 ### The items sub object
 
 | Attributes |   |
@@ -825,11 +831,6 @@ Creates a new order object, specific to rewards programs.
 | **currency_code** string | ISO currency code (e.g. USD, CAD) |
 | **amount** string | The amount of the spend |
 
-##### Endpoint
-
-```nginx
-POST /api/v4/programs/{program_id}/orders
-```
 
 ## List all orders
 
