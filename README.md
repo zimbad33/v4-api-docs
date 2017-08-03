@@ -863,7 +863,7 @@ Retrieves the details of an existing order, specific to rewards programs.
 | **program_id** integer, required | Unique identifier assigned to each program |
 | **id** string, required | Unique identifier for the order |
 | **use_program_order_id** boolean, optional | Dictates whether to use the program-supplied order id. By default, `use_program_order_id` is set to `false`. |
-| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. `en-CA`, `en-US`. |
 
 ##### Endpoint
 
