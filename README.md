@@ -810,12 +810,15 @@ Creates a new order object, specific to rewards programs.
 
 ### The member spend sub object
 
+
 | Attributes |   |
 |------------|---|
 | **currency_code** string | Either an ISO currency code (e.g. USD, CAD) or a custom code in the form "XRO-xxx" where "xxx" is the custom code for the points |
 | **amount** string | The amount of the spend |
 
+
 ### The retail value sub object
+
 
 | Attributes |   |
 |------------|---|
