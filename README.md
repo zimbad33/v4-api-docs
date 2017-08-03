@@ -795,8 +795,32 @@ Creates a new order object, specific to rewards programs.
 | **payment_status** string, optional | Possible values are `PAID`, `PENDING`, `REJECTED`, or `REFUNDED`. By default, `payment_status` is set to `PAID`. |
 | **payment_status_notes** string, optional | Notes pertaining to the payment status. |
 | **detailed** boolean, optional | When set to true, full order details are returned/provided. |
-| **items** object, required | A collection of items included in this order. |
-| **member** object, required | A [member object](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
+| **items** object, required | A collection of [items](#the-items-sub-object) included in this order. |
+| **member** object, required | A [member](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
+
+### The items sub object
+
+| Attributes |   |
+|------------|---|
+| **item_order_token** string | order_token of the item being ordered (as supplied by rewards api) |
+| **quantity** integer | The quantity of this item being ordered |
+| **member_spend** object | The [member spend](#the-member-spend-sub-object) |
+| **retail_value** object, optional | The [retail value](#the-retail-value-sub-object) (used for value of gift cards)
+
+### The member spend sub object
+
+| Attributes |   |
+|------------|---|
+| **currency_code** string | Either an ISO currency code (e.g. USD, CAD) or a custom code in the form "XRO-xxx" where "xxx" is the custom code for the points |
+| **amount** string | The amount of the spend |
+
+### The retail value sub object
+
+| Attributes |   |
+|------------|---|
+| **currency_code** string | ISO currency code (e.g. USD, CAD) |
+| **amount** string | The amount of the spend |
 
 ##### Endpoint
 
@@ -810,14 +834,15 @@ Returns a list of orders for a specific member in your rewards program. The orde
 
 | Arguments |   |
 |-----------|---|
-| **member_id** integer, required | Unique identifier assigned to each member |
 | **program_id** integer, required | Unique identifier assigned to each program |
-| **detailed** boolean, optional | The type of list returned |
-| **start_date** string, optional | Start date of date range to query for orders. |
-| **end_date** string, optional | End date of date range to query for orders. |
+| **member_id** integer | Unique identifier assigned to each member |
+| **start_date** string, optional | Start Date for date range of changed items (ISO8601 Combined date and time in UTC) |
+| **end_date** string, optional | End Date for date range of changed items (ISO8601 Combined date and time in UTC) |
+| **detailed** boolean, optional | Return detailed objects (default: false)  |
 | **page** tag, optional | The page number to return. |
 | **per_page_count** integer, optional | Number of orders returned per page. |
 | **sort_by** string, optional | Sort reward results [newest, oldest]. |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
 
 ##### Endpoint
 
@@ -831,9 +856,10 @@ Retrieves the details of an existing order, specific to rewards programs.
 
 | Arguments |   |
 |-----------|---|
-| **id** string, required | Unique identifier for the order |
 | **program_id** integer, required | Unique identifier assigned to each program |
-| **use_program_order_id** boolean, optional | Dictates whether to use the program-supplied order id. By default, `use_program_order_id` is set to `false`.
+| **id** string, required | Unique identifier for the order |
+| **use_program_order_id** boolean, optional | Dictates whether to use the program-supplied order id. By default, `use_program_order_id` is set to `false`. |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
 
 ##### Endpoint
 
@@ -851,6 +877,8 @@ Updates the payment status of an existing order, specific to rewards programs.
 | **id** string, required | Unique identifier for the order |
 | **payment_status** string, optional | Possible values are `PAID`, `PENDING`, `REJECTED`, or `REFUNDED`. By default, `payment_status` is set to `PAID`. |
 | **payment_status_notes** string, optional | Notes pertaining to the payment status. |
+| **use_program_order_id** boolean, optional | Use the program's ID rather than the RewardOps ID to identify this order (default false). |
+| **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
 
 ```nginx
 PATCH /api/v4/programs/{program_id}/orders/{id}
