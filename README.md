@@ -902,7 +902,8 @@ Creates a new supplier order object.
 | **program_id** integer, required | Unique identifier assigned to each rewards program. |
 | **item_order_token** string, required | The token identifying the supplier's offsite catalog. |
 | **supplier_order_id** string, optional | A unique identifier provided by the supplier. |
-| **detailed** boolean, optional | When set to true, full order details are returned/provided. By default, `detailed` is set to `false`. | **member_paid** object, required | A member paid object for the supplier order. |
+| **detailed** boolean, optional | When set to true, full order details are returned/provided. By default, `detailed` is set to `false`. 
+| **member_paid** object, required | A member paid object for the supplier order. |
 | **program_cost** object, required | A program cost object for the supplier order. |
 | **items** object, required | A collection of supplier items included in this order. |
 | **member** object, required | A [member object](#the-member-sub-object) for the order, containing details of the reward program member that placed the order. |
