@@ -884,6 +884,7 @@ Updates the payment status of an existing order, specific to rewards programs.
 | **use_program_order_id** boolean, optional | Use the program's ID rather than the RewardOps ID to identify this order (default false). |
 | **accept_language** string, optional | in the format of Accept-Language as per RFC2616 (defaults to program settings) ex. 'en-CA, en-US'. |
 
+##### Endpoint
 ```nginx
 PATCH /api/v4/programs/{program_id}/orders/{id}
 ```
