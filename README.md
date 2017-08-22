@@ -27,7 +27,7 @@ The JSON response will contain an `access_token` that you can use in subsequent 
 ```nginx
 # Base64-encode the client_id and client_secret, separated by a colon. Then use the base64 string in the Authorization header.
 
-echo -n "CLIENT_ID:CLIENT_SECRET" | openssl enc -base64 -A | { read ENCODED_CREDENTIALS; curl https://demo.rewardops.net/api/v4/auth/token --header "Authorization: Basic $ENCODED_CREDENTIALS" --data "grant_type=client_credentials" --verbose; }
+echo -n "CLIENT_ID:CLIENT_SECRET" | openssl enc -base64 -A | { read ENCODED_CREDENTIALS; curl https://int-api.rewardops.net/api/v4/auth/token --header "Authorization: Basic $ENCODED_CREDENTIALS" --data "grant_type=client_credentials" --verbose; }
 
 # Response:
 
